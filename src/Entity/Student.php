@@ -16,6 +16,10 @@ class Student
     #[ORM\Column(length: 20, nullable: true)]
     private ?string $email = null;
 
+    #[ORM\ManyToOne(inversedBy: 'students')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Classroom $Classroom = null;
+
     public function getNcs(): ?int
     {
         return $this->ncs;
@@ -29,6 +33,18 @@ class Student
     public function setEmail(?string $email): self
     {
         $this->email = $email;
+
+        return $this;
+    }
+
+    public function getClassroom(): ?Classroom
+    {
+        return $this->Classroom;
+    }
+
+    public function setClassroom(?Classroom $Classroom): self
+    {
+        $this->Classroom = $Classroom;
 
         return $this;
     }
